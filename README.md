@@ -1,4 +1,4 @@
-# Idle Mountain
+# Idle Mountains
 
 Idle Mountain est un idle game d'horreur dans l'ambiance angoissante des oeuvres de H.P. Lovecraft.
 
