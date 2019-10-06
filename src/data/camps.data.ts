@@ -10,7 +10,11 @@ export const campsData: readonly ICampInfos[] = [{
     actions: {
       build: [],
       explore: [],
-      experiment: [{ name: 'Lire articles de biologie polaire', time: 180, id: 0 }],
+      experiment: [{
+        name: 'Lire articles de biologie polaire',
+        time: 180,
+        id: 0,
+      }],
       lead: [],
     },
   }],

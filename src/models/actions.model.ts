@@ -1,13 +1,22 @@
-export type IActions = {
-    readonly build: readonly any[];
-    readonly explore: readonly any[];
-    readonly experiment: readonly any[];
-    readonly lead: readonly any[];
+import { Entity } from './entities.model';
+
+export type TActions = {
+    readonly build: readonly Action[];
+    readonly explore: readonly Action[];
+    readonly experiment: readonly Action[];
+    readonly lead: readonly Action[];
+}
+export interface Action extends Entity {
+  name: string;
+  time: number;
 }
 
-export const emptyActions: IActions = {
-  build: [],
-  experiment: [],
-  explore: [],
-  lead: [],
+export type TActionEntitities = {
+  [id: string]: Action;
+}
+export const emptyActions: TActions = {
+  build: [] as Action[],
+  experiment: [] as Action[],
+  explore: [] as Action[],
+  lead: [] as Action[],
 };

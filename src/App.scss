@@ -1,11 +1,18 @@
 .app {
+  height: 100%;
+  .menu {
+    border-bottom: 1px solid black;
+  }
+  .panels {
     display: flex;
     height: 100%;
-    .places, .actions {
-        width: 50%;
-        height: 100%;
+    .places,
+    .actions {
+      width: 50%;
+      height: 100%;
     }
     .places {
-        border-right: 1px solid black;
+      border-right: 1px solid black;
     }
+  }
 }
