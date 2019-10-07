@@ -5,24 +5,24 @@ import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 
 // custom
 import './Camp.scss';
-import { ICampInfos } from '../../models/camps.model';
-import { IMember } from '../../models/members.model';
+import { CampInfos } from '../../models/camps.model';
+import { Member } from '../../models/members.model';
 
 
 type IProps = {
-    readonly infos: ICampInfos;
-    readonly changeSelectedMembers: (m: IMember[]) => void;
+    readonly infos: CampInfos;
+    readonly changeSelectedMember: (m: Member) => void;
 };
 
-const Camp: React.FC<IProps> = ({ infos, changeSelectedMembers }: IProps) => {
+const Camp: React.FC<IProps> = ({ infos, changeSelectedMember }: IProps) => {
   const [opened, setOpened] = useState(false);
   const toggleOpened = (event: React.MouseEvent): void => {
     event.preventDefault();
     setOpened(!opened);
   };
-  const handleMemberClick = (member: IMember): any =>
+  const handleMemberClick = (member: Member): any =>
     (event: React.MouseEvent): void =>
-      changeSelectedMembers([member]);
+      changeSelectedMember(member);
 
   return (
     <div className="camp">

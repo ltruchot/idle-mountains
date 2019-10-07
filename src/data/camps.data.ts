@@ -1,22 +1,22 @@
-import { ICampInfos } from '../models/camps.model';
+import { CampInfos } from '../models/camps.model';
 
-export const campsData: readonly ICampInfos[] = [{
+export const campsData: readonly CampInfos[] = [{
   name: 'Erebus base camp',
   id: 0,
   team: [{
     type: 'human',
     name: 'Professeur Lake',
     id: 0,
-    actions: {
-      build: [],
-      explore: [],
-      experiment: [{
+    inventory: [0, 1, 1, 2],
+    actions: [
+      {
+        type: 'experiment',
         name: 'Lire articles de biologie polaire',
         time: 180,
         id: 0,
-      }],
-      lead: [],
-    },
+        requirements: [0, 1],
+      },
+    ],
   }],
   equipment: [],
   vehicles: [],

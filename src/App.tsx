@@ -10,53 +10,50 @@ import Actions from './app/Actions/Actions';
 import { campsData } from './data/camps.data';
 
 // models
-import { IMember } from './models/members.model';
-import { useInterval } from './hooks/useInterval';
+import { Member } from './models/members.model';
+import { Action } from './models/actions.model';
+
+// helpers
 import { add1Minute } from './helpers/Date.helpers';
-import { Action, emptyActions } from './models/actions.model';
-import { usePrevious } from './hooks/usePrevious';
+
+// hooks
+import { useInterval } from './hooks/useInterval';
 
 
 const App: React.FC = (_) => {
   // states
   const [camps, setCamps] = useState(campsData);
-  const [selectedMembers, setSelectedMembers] = useState([] as IMember[]);
+  const [selectedMember, setSelectedMember] = useState({} as Member);
   const [actionsToBegin, setActionsToBegin] = useState([] as Action[]);
   const [runningActions, setRunningActions] = useState([] as Action[]);
   const [actionsToEnd, setActionsToEnd] = useState([] as Action[]);
   const [date, setDate] = useState(new Date(1930, 10, 25, 16, 5));
-  const [delay, setDelay] = useState(1000);
+  const [delay, setDelay] = useState(10);
 
 
   // functions
-  const selectMembers = (members: IMember[]): void => {
-    setSelectedMembers(members);
+  const selectMember = (member: Member): void => {
+    setSelectedMember(member);
   };
   const toNextTickActions = (action: Action): void => {
     if (!runningActions.find((a) => (a.id === action.id))) {
       setActionsToBegin(() => [...actionsToBegin, action]);
     }
   };
-  /*   const treatRunningActions = (): void => {
-    console.log('running', runningActions);
-    setActionsToEnd(
-      () => runningActions.filter((action) => (action.time <= 0)),
-    );
-    setRunningActions(
-      () => runningActions.filter((action) => (action.time > 0)),
-    );
-  }; */
-  const running = usePrevious(runningActions);
+
   useEffect(() => {
     if (actionsToBegin.length) {
       setRunningActions([...runningActions, ...actionsToBegin]);
       setActionsToBegin([]);
     }
-    if (running === runningActions && runningActions.length) {
-      setRunningActions(runningActions.map((action) =>
-        ({ ...action, time: action.time - 1 })));
+    if (runningActions.length) {
+      const endingAction = runningActions.filter((action) => (action.time <= 0));
+      setRunningActions(runningActions
+        .map((action) => ({ ...action, time: action.time - 1 }))
+        .filter((action) => (action.time > 0)));
+      setActionsToEnd(endingAction);
     }
-  }, [actionsToBegin, date, running, runningActions]);
+  }, [date]);
 
   // business
   useInterval(() => {
@@ -73,10 +70,10 @@ const App: React.FC = (_) => {
         <div className="places">
           <div className="camps">
             <h3>Camps</h3>
-            { camps.map((camp) => <Camp key={camp.id} infos={camp} changeSelectedMembers={selectMembers} />) }
+            { camps.map((camp) => <Camp key={camp.id} infos={camp} changeSelectedMember={selectMember} />) }
           </div>
         </div>
-        <Actions beginAction={toNextTickActions} members={selectedMembers} running={runningActions} />
+        <Actions beginAction={toNextTickActions} member={selectedMember} running={runningActions} />
       </div>
     </div>
   );

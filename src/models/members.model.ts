@@ -1,8 +1,9 @@
-import { TActions } from './actions.model';
+import { Action } from './actions.model';
+import { Entity } from './entities.model';
 
-export type IMember = {
+export interface Member extends Entity {
     readonly type: 'human';
-    readonly id: number;
     readonly name: string;
-    readonly actions: TActions;
-  };
+    readonly inventory: number[];
+    readonly actions: Action[];
+  }

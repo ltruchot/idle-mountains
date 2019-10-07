@@ -1,12 +1,12 @@
 // npm
 import React from 'react';
 import './Actions.scss';
-import { head } from 'fp-ts/lib/Array';
+import { head, map } from 'fp-ts/lib/Array';
 import { getOrElse } from 'fp-ts/lib/Option';
 import { flow } from 'fp-ts/lib/function';
-import { IMember } from '../../models/members.model';
+import { Member } from '../../models/members.model';
 import {
-  TActions, emptyActions, Action, TActionEntitities,
+  Action, TActionEntitities,
 } from '../../models/actions.model';
 import { prop } from '../../helpers/Option.helpers';
 import { formatTaskTime } from '../../helpers/Date.helpers';
@@ -14,45 +14,45 @@ import { toEntities } from '../../helpers/Array.helpers';
 
 
 type IProps = {
-    members: IMember[];
+    member: Member;
     running: Action[];
     beginAction: (a: Action) => void;
 };
 
 const Actions: React.FC<IProps> = ({
-  members, running,
+  member, running,
   beginAction,
 }: IProps) => {
-  const findActions = (selectedMembers: IMember[]): TActions => {
-    const extractActions = flow(
-      head,
-      prop('actions'),
-      getOrElse(() => emptyActions),
-    );
-    return extractActions(selectedMembers);
-  };
+  const findActions = (selectedMember: Member): Action[] =>
+    selectedMember.actions || [];
 
 
   const handleActionClick = (action: Action): any =>
     (event: React.MouseEvent): void => {
+      const btn = event.target as HTMLButtonElement;
+      btn.disabled = true;
       beginAction(action);
     };
   const runningEntities: TActionEntitities = toEntities(running);
   return (
     <div className="actions">
-      <div className="build" />
-      <div className="explore" />
-      <div className="experiment">
+      <div>
+        <h3>Inventory</h3>
+      </div>
+      <div>
+        <h3>Actions</h3>
         <ul>
           {
-            findActions(members).experiment.map((action) =>
+            findActions(member).map((action: Action) =>
 
-              <li key="{action.id}" onClick={handleActionClick(action)}>
-                {action.name} {
-                  runningEntities[action.id]
-                    ? formatTaskTime(runningEntities[action.id].time)
-                    : formatTaskTime(action.time)
-                }
+              <li key="{action.id}">
+                <button type="button" onClick={handleActionClick(action)}>
+                  {action.name} {
+                  formatTaskTime(runningEntities[action.id]
+                    ? runningEntities[action.id].time
+                    : action.time)
+                  }
+                </button>
               </li>)
           }
         </ul>

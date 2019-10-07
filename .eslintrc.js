@@ -36,6 +36,7 @@ module.exports =  {
       "react/jsx-filename-extension": 0,
       "react/jsx-wrap-multilines": 0,
       "react/jsx-one-expression-per-line": 0,
+      "react-hooks/exhaustive-deps": 0,
       "linebreak-style": 0,
       "max-len": [
         "error",

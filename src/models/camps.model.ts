@@ -1,9 +1,9 @@
-import { IMember } from './members.model';
+import { Member } from './members.model';
+import { Entity } from './entities.model';
 
-export type ICampInfos = {
-  readonly id: number;
+export interface CampInfos extends Entity {
   readonly name: string;
-  readonly team: readonly IMember[];
+  readonly team: readonly Member[];
   readonly equipment: readonly any[];
   readonly vehicles: readonly any[];
-};
+}
