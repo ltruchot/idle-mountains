@@ -4,9 +4,12 @@ Idle Mountain est un idle game d'horreur dans l'ambiance angoissante des oeuvres
 
 Vous y incarnez une équipe de recherche qui explore le continent Antartique pour la première fois, et tente de survivre, de faire de grandes découvertes et de s'enrichir.
 
-Le jeu se déroule sur 3 jours (72 heures, 4320 minutes) de temps réel et ne peut pas être mis en pause.
+Votre équipe de 4 scientifiques est à la tête de 20 hommes et 55 chiens. Vous décidez des actions de chacun de ces 4 leaders, mais attention: le temps presse, vous avez peu de ressources et les dangers sont nombreux.
 
-Ces 3 jours réprésente 6 mois d'expédition: chaque minute de jeu représente donc 1h de cette expédition maudite.
+
+Le jeu se déroule sur 3 jours (soit 72 heures, ou 4320 minutes) de temps réel et ne peut pas être mis en pause.
+
+Ces 3 jours IRL représentent 6 mois IG - chaque minute jouée représente donc 1h de cette expédition maudite...
 
 # React
 
